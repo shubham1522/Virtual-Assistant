@@ -6,6 +6,8 @@ export const userDataContext = createContext()
 function UserContext({ children }) {
   const serverUrl = "http://localhost:8000"
   const [userData, setUserData] = useState(null)
+  const [selected, setSelected] = useState(null);
+  const [customImage, setCustomImage] = useState(null);
 
   const handleCurrentUser = async () => {
     try {

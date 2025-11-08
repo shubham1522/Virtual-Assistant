@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function Signin() {
 	const [showPassword, setShowPassword] = useState(false)
-	const {serverUrl}=useContext(userDataContext)
+	const {serverUrl,userData, setUserData}=useContext(userDataContext)
 	const navigate = useNavigate()
 	const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false);
@@ -28,10 +28,13 @@ function Signin() {
 				console.log('Signin successful:', result.data);
 				navigate('/'); // Redirect to home page after successful signin
         setLoading(false);
+		setUserData(result.data.user);
+		navigate("/home")
 			}
 		} catch (error) {
 			console.error('Signin error:', error.response?.data || error.message);
         setLoading(false);
+		setUserData(null);
 			setErrorMessage(error.response?.data?.message || 'Failed to sign in. Please try again.');
 		}
 	}
